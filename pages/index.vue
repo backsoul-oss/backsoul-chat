@@ -1,71 +1,78 @@
 <template>
-  <div class="flex justify-center items-center h-screen w-screen flex-col">
+  <div class="flex justify-center items-center h-screen w-screen flex-col container-general">
     <div>
-      <ul
-        class="flex justify-between relative z-10"
-        v-for="item of messages"
-        :key="item.id"
-      >
-        <li
-          style="display: flex; justify-content: end; width: 100%"
-          v-if="item.user_name == name"
-        >
-          <div class="container-message">
-            <img
-              src="https://i.pravatar.cc/300"
-              alt=""
-              srcset=""
-              style="border-radius: 100%; width: 3rem;order: 2;"
-            />
-            <p>{{ item.message }}</p>
+        <h1>Personaliza tu nombre</h1>
+        <input
+          type="text"
+          placeholder="ingresa tu nombre"
+          class="border-2 text-center relative z-10"
+          v-model="name"
+        />
+      </div>
+    <div
+      class="flex justify-center items-center h-screen flex-col w-3/4 xl:w-2/3"
+    >
+      <div class="flex justify-center flex-col container-chat">
+        <ul style="overflow: auto; padding: 1rem; border-radius: 1rem">
+          <div
+            v-for="item of messages"
+            :key="item.id"
+            class="flex justify-between relative z-10"
+            style="margin: 1rem 0rem"
+          >
+            <li
+              class="p-3 rounded-2xl"
+              style="display: flex; justify-content: end; width: 100%;box-shadow: 1px 1px 8px -8px black;transition: 0.5s all;margin-bottom: 1rem;"
+              v-if="item.user_name == name"
+            >
+              <div class="container-message">
+                <img
+                  src="https://i.pravatar.cc/300"
+                  alt=""
+                  srcset=""
+                  style="border-radius: 100%; width: 3rem; order: 2"
+                />
+                <p>{{ item.message }}</p>
+              </div>
+            </li>
+            <li class="p-3 rounded-2xl" v-if="item.user_name != name" style="width: 100%;box-shadow: 1px 1px 8px -8px black;transition: 0.5s all;margin-bottom: 1rem;">
+              <div class="container-message">
+                <img
+                  src="https://i.pravatar.cc/300"
+                  alt=""
+                  srcset=""
+                  style="border-radius: 100%; width: 3rem"
+                />
+                <p><strong>{{ item.user_name }}</strong>: {{ item.message }}</p>
+              </div>
+            </li>
           </div>
-        </li>
-        <li v-if="item.user_name != name">
-          <div class="container-message">
-            <img
-              src="https://i.pravatar.cc/300"
-              alt=""
-              srcset=""
-              style="border-radius: 100%; width: 3rem"
-            />
-            <p>{{ item.user_name }}: {{ item.message }}</p>
-          </div>
-        </li>
-      </ul>
-      <div v-if="clientTyping">
-        <div class="flex justify-start">
+        </ul>
+        <div class="flex justify-start" v-if="clientTyping">
           <img
             src="~assets/img/typing.gif"
             alt=""
             srcset=""
             class="relative z-0"
-            style="width: 5rem; margin-bottom: -2rem; margin-top: -1rem"
+            style="width: 5rem; margin-bottom: -1rem; margin-top: -3rem"
           />
         </div>
       </div>
-      <input
-        type="text"
-        placeholder="ingresa tu mensaje"
-        class="border-2 text-center relative z-10"
-        v-model="message"
-        @input="typingMessage"
-      />
-      <button
-        class="bg-red-300 rounded-xl p-3 mt-3 text-white"
-        @click="sendMsg"
+      <div
+        class="flex justify-center items-center mt-3 rounded-xl w-full bg-white"
       >
-        Enviar mensaje
-      </button>
-    </div>
-
-    <div>
-      <h1>Personaliza tu nombre</h1>
-      <input
-        type="text"
-        placeholder="ingresa tu nombre"
-        class="border-2 text-center relative z-10"
-        v-model="name"
-      />
+        <input
+          type="text"
+          placeholder="ingresa tu mensaje"
+          class="border-none text-center relative z-10 container-input"
+          v-model="message"
+          @input="typingMessage"
+          v-on:keyup.enter="sendMsg"
+        />
+        <button class="rounded-xl p-3 text-white" @click="sendMsg" style="background: #40b9ff;">
+          Enviar
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -143,7 +150,48 @@ export default {
 <style>
 .container-message {
   display: flex;
-    align-items: center;
-    gap: 1rem;
+  align-items: center;
+  gap: 1rem;
+}
+.container-general{
+  background: url('~/assets/img/bg.jpeg');
+}
+.container-chat {
+  width: 100%;
+  height: 50vh;
+  box-shadow: 1px 2px 20px -16px black;
+  border-radius: 1rem;
+  overflow-y: auto;
+      background: white;
+  display: flex;
+  justify-content: flex-end;
+}
+.container-input {
+  border-radius: 1rem;
+  width: 100%;
+  height: 3rem;
+  outline: none;
+}
+li:hover {
+  transform: scale(1.02);
+  box-shadow: 1px 1px 10px -8px black;
+  transition: 0.5s all;
+}
+::-webkit-scrollbar {
+  width: 15px;
+  margin: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: white;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(0, 166, 255);
+  border-radius: 10px;
 }
 </style>
