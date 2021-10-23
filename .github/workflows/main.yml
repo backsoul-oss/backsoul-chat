@@ -28,9 +28,6 @@ jobs:
       - name: 'Push heroku branch master'
         run: git push heroku master
 
-      - name: 'Build and push to heroku registry'
-        run: heroku container:push web --app backsoul-chat
-
       - name: 'Releases the container'
         run: heroku container:release web --app backsoul-chat
 
