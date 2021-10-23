@@ -42,7 +42,7 @@ export default {
     io: {
         // module options
         sockets: [{
-            url: 'http://api.chat.backsoul.xyz'
+            url: 'https://backsoul-chat-back.herokuapp.com'
         }]
     },
 
