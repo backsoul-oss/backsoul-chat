@@ -25,8 +25,8 @@ jobs:
       - name: 'Set branch main'
         run: heroku stack:set heroku-20 -a backsoul-chat
 
-      - name: 'Build and push to heroku registry'
-        run: heroku container:push web --app backsoul-chat
+      - name: 'Push heroku branch master'
+        run: git push heroku master
 
       - name: 'Releases the container'
         run: heroku container:release web --app backsoul-chat
