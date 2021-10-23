@@ -1,0 +1,10 @@
+version: '3'
+services:
+  web:
+    container_name: backsoul_chat
+    image: backsoul/backsoul_chat
+    build: .
+    volumes:
+      - .:/chat
+    ports:
+      - '80:3000'
