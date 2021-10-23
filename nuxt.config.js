@@ -42,7 +42,7 @@ export default {
     io: {
         // module options
         sockets: [{
-            url: 'http://localhost:3000'
+            url: 'http://api.chat.backsoul.xyz'
         }]
     },
 
